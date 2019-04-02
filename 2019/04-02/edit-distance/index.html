@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="iamgqr">
 <meta property="og:description" content="编辑距离问题：给定两个字符串\(a\)和\(b\)，计算经过\(a\)以下操作最少几次会变得和\(b\)相同：  替换\(a\)中的一个字符 删去\(a\)中的一个字符 在\(a\)中的某个位置插入一个字符  例：  a=”114” b=”514”  – distance=1 (将第一个1替换为5) a=”1919” b=”810”  – distance=3 a=”abcdmape” b=”ac">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-02T07:31:28.000Z">
+<meta property="og:updated_time" content="2019-04-02T07:34:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于编辑距离">
 <meta name="twitter:description" content="编辑距离问题：给定两个字符串\(a\)和\(b\)，计算经过\(a\)以下操作最少几次会变得和\(b\)相同：  替换\(a\)中的一个字符 删去\(a\)中的一个字符 在\(a\)中的某个位置插入一个字符  例：  a=”114” b=”514”  – distance=1 (将第一个1替换为5) a=”1919” b=”810”  – distance=3 a=”abcdmape” b=”ac">
@@ -48,8 +48,8 @@
     </style>
     <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <!-- <link rel="stylesheet" href="/css/code.css"> -->
-    <link rel="stylesheet" href="/css/style.css?version=4-2-33-22" type="text/css">
-    <link rel="stylesheet" href="/css/code.css?version=4-2-33-22" type="text/css">
+    <link rel="stylesheet" href="/css/style.css?version=4-2-34-59" type="text/css">
+    <link rel="stylesheet" href="/css/code.css?version=4-2-34-59" type="text/css">
 	
 	<!-- baidu tools -->
 	<meta name="baidu-site-verification" content="LIG3jlWL8N">
@@ -458,7 +458,7 @@ $(function(){
         
     
         <br>
-        Last Updated on 2019 Apr 02 15:31:28
+        Last Updated on 2019 Apr 02 15:34:56
         
 		
 		<br>
@@ -480,7 +480,7 @@ $(function(){
 <p>a=”1919” b=”810”  – distance=3</p>
 <p>a=”abcdmape” b=”acemap”  – distance=3</p>
 </blockquote>
-<h1><span id="解法">解法：</span></h1><p>采用动态规划。<br>使用\(d_{i,j}\)来代表“字符串\(a\)的前\(i\)位与\(b\)的前\(j\)位的编辑距离”。<br>初始状态是\(d_{0,0}=0, d_{0,i}=d{i,0}=i\)，要求的值就是\(d_{len(a),len(b)}\)。<br>假设已经计算好\(i\leq m-1\)和\(i=m,j\leq n-1\)时所有的\(d_{i,j}\)，现在我们来计算\(d_{m,n}\)。<br>对于\(a_m\)和\(b_n\)位置的字符，有三种情况：</p>
+<h1><span id="解法">解法：</span></h1><p>采用动态规划。<br>使用\(d_{i,j}\)来代表“字符串\(a\)的前\(i\)位与\(b\)的前\(j\)位的编辑距离”。<br>初始状态是\(d_{0,0}=0, d_{0,i}=d_{i,0}=i\)，要求的值就是\(d_{len(a),len(b)}\)。<br>假设已经计算好\(i\leq m-1\)和\(i=m,j\leq n-1\)时所有的\(d_{i,j}\)，现在我们来计算\(d_{m,n}\)。<br>对于\(a_m\)和\(b_n\)位置的字符，有三种情况：</p>
 <ol>
 <li>\(a_m\)与\(b_n\)匹配（相同或不相同）。</li>
 <li>\(a\)中\(a_m\)被删除。</li>
@@ -577,10 +577,10 @@ $(function(){
 		winWidth=document.documentElement.clientWidth;
 	}
 	var rAtIo=winWidth/winHeight;
-	if(rAtIo<1)					$.backstretch("/css/images/background_nico3.jpg?version=4-2-33-22");
-	else if(rAtIo<1920/1200)	$.backstretch("/css/images/background_nico2.jpg?version=4-2-33-22");
-	else						$.backstretch("/css/images/background_nico1.jpg?version=4-2-33-22");
-    //$.backstretch("/css/images/background.jpg?version=4-2-33-22");
+	if(rAtIo<1)					$.backstretch("/css/images/background_nico3.jpg?version=4-2-34-59");
+	else if(rAtIo<1920/1200)	$.backstretch("/css/images/background_nico2.jpg?version=4-2-34-59");
+	else						$.backstretch("/css/images/background_nico1.jpg?version=4-2-34-59");
+    //$.backstretch("/css/images/background.jpg?version=4-2-34-59");
 
     
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
