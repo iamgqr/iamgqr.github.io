@@ -7,7 +7,7 @@
   <title>【NOI2014】魔法森林 | iamgqr</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="UOJ 2W BZOJ 1AUOJ传送门 麻麻UOJ ExT卡我QAQ 正常NOI的10个数据是可以过的QAQ 最基本的思路先枚举最大边的a值（先按a值对边排个序，然后依次加入图）问题就是对于每个a值求最小需要的b值，然后加一起更新ans值            ←我与std就重合到这QAQ一个一个枚举？辣鸡二分？感觉还不如枚举QAQSPFA求？要是每次都从头来一次的话一定很慢所以记录上一次SPF">
-<meta name="keywords" content="NOI,SPFA,CC">
+<meta name="keywords" content="NOI,CC,SPFA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【NOI2014】魔法森林">
 <meta property="og:url" content="http://iamgqr.gq/2017/07-15/noi2014magicalforest/index.html">
@@ -48,8 +48,8 @@
     </style>
     <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <!-- <link rel="stylesheet" href="/css/code.css"> -->
-    <link rel="stylesheet" href="/css/style.css?version=4-2-30-39" type="text/css">
-    <link rel="stylesheet" href="/css/code.css?version=4-2-30-39" type="text/css">
+    <link rel="stylesheet" href="/css/style.css?version=4-2-26-41" type="text/css">
+    <link rel="stylesheet" href="/css/code.css?version=4-2-26-41" type="text/css">
 	
 	<!-- baidu tools -->
 	<meta name="baidu-site-verification" content="LIG3jlWL8N">
@@ -617,10 +617,10 @@ queue<span class="token operator">&lt;</span><span class="token keyword">int</sp
 		winWidth=document.documentElement.clientWidth;
 	}
 	var rAtIo=winWidth/winHeight;
-	if(rAtIo<1)					$.backstretch("/css/images/background_nico3.jpg?version=4-2-30-39");
-	else if(rAtIo<1920/1200)	$.backstretch("/css/images/background_nico2.jpg?version=4-2-30-39");
-	else						$.backstretch("/css/images/background_nico1.jpg?version=4-2-30-39");
-    //$.backstretch("/css/images/background.jpg?version=4-2-30-39");
+	if(rAtIo<1)					$.backstretch("/css/images/background_nico3.jpg?version=4-2-26-41");
+	else if(rAtIo<1920/1200)	$.backstretch("/css/images/background_nico2.jpg?version=4-2-26-41");
+	else						$.backstretch("/css/images/background_nico1.jpg?version=4-2-26-41");
+    //$.backstretch("/css/images/background.jpg?version=4-2-26-41");
 
     
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

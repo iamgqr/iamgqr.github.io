@@ -4,20 +4,20 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>CF415C Mashmokh and Numbers | iamgqr</title>
+  <title>关于编辑距离 | iamgqr</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="传送门1ACF的C题哪里有这么水的。。。一看Div.2。。。大意：要求你构造一个长度为n的各项不相等的正整数数列a，使得gcd(a[2i-1],a[2i])的和（如果n是单数最后一个数不算）为kk&amp;lt;n/2的时候啃定不行，因为gcd至少是1否则使得第一对gcd是k-n/2+1，其他对gcd都是1（反正我是这么做的）由于相邻正整数gcd是1，就可以乱搞了坑点：n=1要特判QAQ还好我事先发觉 #">
-<meta name="keywords" content="构造">
+  <meta name="description" content="编辑距离问题：给定两个字符串\(a\)和\(b\)，计算经过\(a\)以下操作最少几次会变得和\(b\)相同：  替换\(a\)中的一个字符 删去\(a\)中的一个字符 在\(a\)中的某个位置插入一个字符  例：  a=”114” b=”514”  – distance=1 (将第一个1替换为5) a=”1919” b=”810”  – distance=3 a=”abcdmape” b=”ac">
+<meta name="keywords" content="动态规划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CF415C Mashmokh and Numbers">
-<meta property="og:url" content="http://iamgqr.gq/2017/07-11/cf415C/index.html">
+<meta property="og:title" content="关于编辑距离">
+<meta property="og:url" content="http://iamgqr.gq/2019/04-02/edit-distance/index.html">
 <meta property="og:site_name" content="iamgqr">
-<meta property="og:description" content="传送门1ACF的C题哪里有这么水的。。。一看Div.2。。。大意：要求你构造一个长度为n的各项不相等的正整数数列a，使得gcd(a[2i-1],a[2i])的和（如果n是单数最后一个数不算）为kk&amp;lt;n/2的时候啃定不行，因为gcd至少是1否则使得第一对gcd是k-n/2+1，其他对gcd都是1（反正我是这么做的）由于相邻正整数gcd是1，就可以乱搞了坑点：n=1要特判QAQ还好我事先发觉 #">
+<meta property="og:description" content="编辑距离问题：给定两个字符串\(a\)和\(b\)，计算经过\(a\)以下操作最少几次会变得和\(b\)相同：  替换\(a\)中的一个字符 删去\(a\)中的一个字符 在\(a\)中的某个位置插入一个字符  例：  a=”114” b=”514”  – distance=1 (将第一个1替换为5) a=”1919” b=”810”  – distance=3 a=”abcdmape” b=”ac">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-12T02:04:56.000Z">
+<meta property="og:updated_time" content="2019-04-02T07:24:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CF415C Mashmokh and Numbers">
-<meta name="twitter:description" content="传送门1ACF的C题哪里有这么水的。。。一看Div.2。。。大意：要求你构造一个长度为n的各项不相等的正整数数列a，使得gcd(a[2i-1],a[2i])的和（如果n是单数最后一个数不算）为kk&amp;lt;n/2的时候啃定不行，因为gcd至少是1否则使得第一对gcd是k-n/2+1，其他对gcd都是1（反正我是这么做的）由于相邻正整数gcd是1，就可以乱搞了坑点：n=1要特判QAQ还好我事先发觉 #">
+<meta name="twitter:title" content="关于编辑距离">
+<meta name="twitter:description" content="编辑距离问题：给定两个字符串\(a\)和\(b\)，计算经过\(a\)以下操作最少几次会变得和\(b\)相同：  替换\(a\)中的一个字符 删去\(a\)中的一个字符 在\(a\)中的某个位置插入一个字符  例：  a=”114” b=”514”  – distance=1 (将第一个1替换为5) a=”1919” b=”810”  – distance=3 a=”abcdmape” b=”ac">
 <meta name="twitter:creator" content="@iamgqr">
 <link rel="publisher" href="https://plus.google.com/114550357749490779368">
 <meta property="fb:app_id" content="iamgqr">
@@ -447,18 +447,18 @@ $(function(){
 
     <!-- Title -->
     <h2 class="blog-item-title">
-        <a href="/2017/07-11/cf415C/">
-            CF415C Mashmokh and Numbers
+        <a href="/2019/04-02/edit-distance/">
+            关于编辑距离
         </a>
     </h2>
 
     <!-- Date and Author -->
     <p class="blog-item-meta">
-        Published on 2017 Jul 11 09:22:57
+        Published on 2019 Apr 02 14:31:15
         
     
         <br>
-        Last Updated on 2017 Jul 12 10:04:56
+        Last Updated on 2019 Apr 02 15:24:30
         
 		
 		<br>
@@ -468,30 +468,28 @@ $(function(){
 
 
     <!-- Content -->
-    <p><a href="http://codeforces.com/problemset/problem/415/C" target="_blank" rel="noopener">传送门</a><br><del>1A</del><br>CF的C题哪里有这么水的。。。一看Div.2。。。<br>大意：要求你构造一个长度为n的各项不相等的正整数数列a，使得gcd(a[2i-1],a[2i])的和（如果n是单数最后一个数不算）为k<br>k&lt;n/2的时候啃定不行，因为gcd至少是1<br>否则使得第一对gcd是k-n/2+1，其他对gcd都是1（反正我是这么做的）<br>由于相邻正整数gcd是1，就可以乱搞了<br>坑点：n=1要特判QAQ还好我事先发觉</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">int</span> n<span class="token punctuation">,</span>k<span class="token punctuation">;</span>
-    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">,</span><span class="token operator">&amp;</span>k<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">/</span><span class="token number">2</span><span class="token operator">></span>k<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"-1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"-1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span>k<span class="token operator">-</span>n<span class="token operator">/</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> t<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">(</span>k<span class="token operator">-</span>n<span class="token operator">/</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span><span class="token operator">++</span>i<span class="token punctuation">,</span><span class="token operator">++</span>t<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" %d"</span><span class="token punctuation">,</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <h1><span id="编辑距离问题">编辑距离问题：</span></h1><p>给定两个字符串\(a\)和\(b\)，计算经过\(a\)以下操作最少几次会变得和\(b\)相同：</p>
+<ol>
+<li>替换\(a\)中的一个字符</li>
+<li>删去\(a\)中的一个字符</li>
+<li>在\(a\)中的某个位置插入一个字符</li>
+</ol>
+<p>例：</p>
+<blockquote>
+<p>a=”114” b=”514”  – distance=1 (将第一个1替换为5)</p>
+<p>a=”1919” b=”810”  – distance=3</p>
+<p>a=”abcdmape” b=”acemap”  – distance=3</p>
+</blockquote>
+<h1><span id="解法">解法：</span></h1><p>采用动态规划。<br>使用\(d_{i,j}\)来代表“字符串\(a\)的前\(i\)位与\(b\)的前\(j\)位的编辑距离”。<br>初始状态是\(d_{0,0}=0, d_{0,i}=d{i,0}=i\)，要求的值就是\(d_{len(a),len(b)}\)。<br>假设已经计算好\(i\leq m-1\)和\(i=m,j\leq n-1\)时所有的\(d_{i,j}\)，现在我们来计算\(d_{m,n}\)。<br>对于\(a_m\)和\(b_n\)位置的字符，有三种情况：</p>
+<ol>
+<li>\(a_m\)与\(b_n\)匹配（相同或不相同）。</li>
+<li>\(a\)中\(a_m\)被删除。</li>
+<li>\(a\)中\(a_m\)后添加了\(b_n\)</li>
+</ol>
+<p>(1)对应\(a_{1..m-1}\)与\(b_{1..n-1}\)计算编辑距离后，\(a_m\)与\(b_n\)比较。如果\(a_m=b_n\)那么(1)对应的编辑距离就是\(d_{m-1,n-1}\)；\(a_m\neq b_n\)那么(1)对应的编辑距离则是\(d_{m-1,n-1}+1\)。<br>(2)对应\(a_{1..m-1}\)与\(b_{1..n}\)计算编辑距离后删除\(a_m\)。(2)对应的编辑距离就是\(d_{m-1,n}+1\)。<br>(3)对应\(a_{1..m}\)与\(b_{1..n-1}\)计算编辑距离后添加\(b_n\)。(3)对应的编辑距离就是\(d_{m,n-1}+1\)。<br>最终的\(d_{i,j}\)应该是这三种情况取最小值，因为距离越小越好。<br>那么最终就是：</p>
+<p>$$<br>d_{m,n}=\left{<br>\begin{array}{rcl}<br>min{d_{m-1,n-1},d_{m-1,n}+1,d_{m,n-1}+1}    &amp;a_m=b_n<br>max{d_{m-1,n-1}+1,d_{m-1,n}+1,d_{m,n-1}+1}    &amp;a_m\neq b_n<br>\end{array}{rcl}<br>\right.<br>$$</p>
+<p>那么只需要从小到大枚举\(i\)，对于每个\(i\)从小到大枚举\(j\)，计算\(d_{i,j}\)就可以了。<br>就完事了。<br>/cy</p>
+<p>代码见ppt（（（</p>
 
 
     <hr>
