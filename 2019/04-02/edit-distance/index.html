@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="iamgqr">
 <meta property="og:description" content="编辑距离问题：给定两个字符串\(a\)和\(b\)，计算经过\(a\)以下操作最少几次会变得和\(b\)相同：  替换\(a\)中的一个字符 删去\(a\)中的一个字符 在\(a\)中的某个位置插入一个字符  例：  a=”114” b=”514”  – distance=1 (将第一个1替换为5) a=”1919” b=”810”  – distance=3 a=”abcdmape” b=”ac">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-02T07:24:30.000Z">
+<meta property="og:updated_time" content="2019-04-02T07:31:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于编辑距离">
 <meta name="twitter:description" content="编辑距离问题：给定两个字符串\(a\)和\(b\)，计算经过\(a\)以下操作最少几次会变得和\(b\)相同：  替换\(a\)中的一个字符 删去\(a\)中的一个字符 在\(a\)中的某个位置插入一个字符  例：  a=”114” b=”514”  – distance=1 (将第一个1替换为5) a=”1919” b=”810”  – distance=3 a=”abcdmape” b=”ac">
@@ -48,8 +48,8 @@
     </style>
     <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <!-- <link rel="stylesheet" href="/css/code.css"> -->
-    <link rel="stylesheet" href="/css/style.css?version=4-2-26-41" type="text/css">
-    <link rel="stylesheet" href="/css/code.css?version=4-2-26-41" type="text/css">
+    <link rel="stylesheet" href="/css/style.css?version=4-2-33-22" type="text/css">
+    <link rel="stylesheet" href="/css/code.css?version=4-2-33-22" type="text/css">
 	
 	<!-- baidu tools -->
 	<meta name="baidu-site-verification" content="LIG3jlWL8N">
@@ -458,7 +458,7 @@ $(function(){
         
     
         <br>
-        Last Updated on 2019 Apr 02 15:24:30
+        Last Updated on 2019 Apr 02 15:31:28
         
 		
 		<br>
@@ -487,7 +487,7 @@ $(function(){
 <li>\(a\)中\(a_m\)后添加了\(b_n\)</li>
 </ol>
 <p>(1)对应\(a_{1..m-1}\)与\(b_{1..n-1}\)计算编辑距离后，\(a_m\)与\(b_n\)比较。如果\(a_m=b_n\)那么(1)对应的编辑距离就是\(d_{m-1,n-1}\)；\(a_m\neq b_n\)那么(1)对应的编辑距离则是\(d_{m-1,n-1}+1\)。<br>(2)对应\(a_{1..m-1}\)与\(b_{1..n}\)计算编辑距离后删除\(a_m\)。(2)对应的编辑距离就是\(d_{m-1,n}+1\)。<br>(3)对应\(a_{1..m}\)与\(b_{1..n-1}\)计算编辑距离后添加\(b_n\)。(3)对应的编辑距离就是\(d_{m,n-1}+1\)。<br>最终的\(d_{i,j}\)应该是这三种情况取最小值，因为距离越小越好。<br>那么最终就是：</p>
-<p>$$<br>d_{m,n}=\left{<br>\begin{array}{rcl}<br>min{d_{m-1,n-1},d_{m-1,n}+1,d_{m,n-1}+1}    &amp;a_m=b_n<br>max{d_{m-1,n-1}+1,d_{m-1,n}+1,d_{m,n-1}+1}    &amp;a_m\neq b_n<br>\end{array}{rcl}<br>\right.<br>$$</p>
+<p>$$<br>d_{m,n}=\begin{cases}<br>min\{d_{m-1,n-1},d_{m-1,n}+1,d_{m,n-1}+1\}    &amp;a_m=b_n\\<br>min\{d_{m-1,n-1}+1,d_{m-1,n}+1,d_{m,n-1}+1\}    &amp;a_m\neq b_n<br>\end{cases}<br>$$</p>
 <p>那么只需要从小到大枚举\(i\)，对于每个\(i\)从小到大枚举\(j\)，计算\(d_{i,j}\)就可以了。<br>就完事了。<br>/cy</p>
 <p>代码见ppt（（（</p>
 
@@ -577,10 +577,10 @@ $(function(){
 		winWidth=document.documentElement.clientWidth;
 	}
 	var rAtIo=winWidth/winHeight;
-	if(rAtIo<1)					$.backstretch("/css/images/background_nico3.jpg?version=4-2-26-41");
-	else if(rAtIo<1920/1200)	$.backstretch("/css/images/background_nico2.jpg?version=4-2-26-41");
-	else						$.backstretch("/css/images/background_nico1.jpg?version=4-2-26-41");
-    //$.backstretch("/css/images/background.jpg?version=4-2-26-41");
+	if(rAtIo<1)					$.backstretch("/css/images/background_nico3.jpg?version=4-2-33-22");
+	else if(rAtIo<1920/1200)	$.backstretch("/css/images/background_nico2.jpg?version=4-2-33-22");
+	else						$.backstretch("/css/images/background_nico1.jpg?version=4-2-33-22");
+    //$.backstretch("/css/images/background.jpg?version=4-2-33-22");
 
     
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
