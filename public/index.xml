@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>StageChan</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on StageChan</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 May 2026 21:44:48 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/posts/hello-world/</link>
+      <pubDate>Sun, 17 May 2026 21:44:48 +0800</pubDate>
+      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;winget install Hugo.Hugo.Extended
+hugo new site iamgqr.github.io
+cd iamgqr.github.io
+git init
+git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+echo &amp;#34;theme = &amp;#39;PaperMod&amp;#39;&amp;#34; &amp;gt;&amp;gt; hugo.toml
+hugo new posts/hello-world.md
+vi content/posts/hello-world.md
+hugo server -D
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+  </channel>
+</rss>
