@@ -6,8 +6,56 @@
     <description>Recent content in Posts on StageChan</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 May 2026 21:44:48 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2026 22:11:15 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Screeps Devlog #1: About my first iteration on &#34;blob&#34;</title>
+      <link>http://localhost:1313/posts/blob-ideas-cn/</link>
+      <pubDate>Sun, 17 May 2026 22:11:15 +0800</pubDate>
+      <guid>http://localhost:1313/posts/blob-ideas-cn/</guid>
+      <description>&lt;p&gt;上周我花了一整周开发&amp;quot;blob&amp;quot;，终于使用它击败了Level 4 Stronghold，花费了2个左右的6人blob队（T3）。很多人想知道我是怎么做到的，所以我在这里讲讲我的思路。&lt;/p&gt;
+&lt;h2 id=&#34;what-is-blob&#34;&gt;What is &amp;ldquo;blob&amp;rdquo;?&lt;/h2&gt;
+&lt;p&gt;&amp;ldquo;Blob&amp;quot;从字面上来看就是&amp;quot;一坨creep&amp;rdquo;。它没有固定的阵型，所以更加灵活。本文中的blob是指这种实现方式：自定义权重、从权重中涌现出行为；每个小队成员与其他成员协同，寻找能达到收益最大化的行动。&lt;/p&gt;
+&lt;h2 id=&#34;why-blob&#34;&gt;Why blob?&lt;/h2&gt;
+&lt;h3 id=&#34;duo&#34;&gt;Duo&lt;/h3&gt;
+&lt;p&gt;Duo是&amp;quot;固定阵型&amp;quot;中最简单的范例了，一般是单输出+单治疗，很多人实现战斗时在blinky单兵策略后就实现的是这个。缺点在于人数太少，很多时候奶量是撑不住RCL8情况下敌人的6个防御塔的，特别是敌人房内还有creep守卫时。&lt;/p&gt;
+&lt;h3 id=&#34;quad&#34;&gt;Quad&lt;/h3&gt;
+&lt;p&gt;Quad是由Tigga popularized的策略，现在属于占领了meta的策略，很多pvp大佬如Harabi都在用。Quad是四个creep成2x2的阵型进行行动，很多时候是2个输出+两个奶。Quad 解决了人数问题，但引入了新局限&amp;quot;阵型约束&amp;quot;：2×2 固定编队在复杂地形中难以灵活通过，很多时候穿过狭缝还要写特殊逻辑。&lt;/p&gt;
+&lt;p&gt;以及一些固定阵型的共通问题，Quad实际上并没有解决：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;小队之间很难做协同。&lt;/li&gt;
+&lt;li&gt;根本原因在于决策模型局限：它的逻辑全部是自上而下的&amp;quot;死逻辑&amp;quot;，所有决策都是硬编码的 if-else 条件——什么时候前进、后退、冒险，全靠程序员枚举 edge case。枚举永远不完整。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;blob&#34;&gt;Blob&lt;/h3&gt;
+&lt;p&gt;在这样的背景下，我选择开始专注于blob思路。Blob的核心思路：赋予小队成员的行动以价值，并找到能获得最大价值的行动。&lt;/p&gt;
+&lt;p&gt;Blob相比quad而言，可以解决很多问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;四人&amp;quot;阵容限制&amp;quot;：blob支持任意人数。blob是个筐，想要多少就往里装多少，甚至还可以动态往里加。&lt;/li&gt;
+&lt;li&gt;2x2&amp;quot;阵型限制&amp;quot;：blob无固定阵型，像流体，在地形复杂时更好协调。&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;死逻辑&amp;rdquo;（if-else）：blob不再遵循人为定义的if-else逻辑，而是尝试找到让收益最大化的最优解，从根源避免了&amp;quot;edge case&amp;quot;的存在。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;hungarian-in-blob&#34;&gt;Hungarian in blob&lt;/h3&gt;
+&lt;p&gt;DroidFreak使用了匈牙利算法来实现他的blob：每个creep在本tick可以有多个格子可以去，为它可以选择去的每个格子赋予权重，也就是表示&amp;quot;creep_x如果去pos_y格，则得分是多少&amp;quot;；但受到&amp;quot;两个creep不能占同一格&amp;quot;的限制，可能两个creep_1和creep_2的最优行动都是去同一个格子pos_1，这种情况显然不合法。所以这会变成一个最优匹配问题，为所有creep分配它的目标格子，让所有creep的得分最大化。&lt;/p&gt;
+&lt;p&gt;这种匈牙利算法有一个缺点：无法表达&amp;quot;联合状态&amp;quot;的价值。真实的小队战术里，有大量价值是&amp;quot;联合&amp;quot;的，不能分解成各人独立贡献的总和：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;治疗覆盖：&amp;ldquo;healer A 站在 pos_1 的价值&amp;quot;和&amp;quot;healer B 站在 pos_2 的价值&amp;quot;各自可以算，但&amp;quot;A 和 B 同时在 pos_1 和 pos_2 、能互相覆盖治疗&amp;quot;的额外联合价值，匈牙利表达不了。&lt;/li&gt;
+&lt;li&gt;最弱链决定生死：小队安全性由最脆弱的那只成员决定——这是全局性质，不是各 creep 分数的简单求和。&lt;/li&gt;
+&lt;li&gt;集火协同：多只 creep 同打一个目标才有完整击杀收益，单独评估每只&amp;quot;我能打谁&amp;quot;再匹配无法捕获这一联合增益。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;根本原因其实是：匈牙利算法解的是线性分配问题（目标函数必须可分解为独立单体项之和）；真正的多人协同是不可分解的。所以我思考了blob的其他实现方式。&lt;/p&gt;
+&lt;h2 id=&#34;so-how-blob&#34;&gt;So, how blob?&lt;/h2&gt;
+&lt;h3 id=&#34;introducing-模拟退火&#34;&gt;Introducing 模拟退火&lt;/h3&gt;
+&lt;p&gt;N 只 creep，每只有 9 个方向可选，状态空间是 9^N——即便 N=7 也有数百万种组合，枚举肯定是不可行的。所以我用了模拟退火（Simulated Annealing）。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Screeps Devlog #1: About my first iteration on &#34;blob&#34;</title>
+      <link>http://localhost:1313/posts/blob-ideas/</link>
+      <pubDate>Sun, 17 May 2026 22:11:15 +0800</pubDate>
+      <guid>http://localhost:1313/posts/blob-ideas/</guid>
+      <description>&lt;p&gt;Last week I spent the whole week working on my &amp;ldquo;blob&amp;rdquo; code, and I finally used it to defeat a Level 4 Stronghold! It took about two 6-creep blob squads (T3 parts). A lot of people were wondering how I did it, so I decided to share my thoughts here.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-blob&#34;&gt;What is &amp;ldquo;blob&amp;rdquo;?&lt;/h2&gt;
+&lt;p&gt;Literally, &amp;ldquo;blob&amp;rdquo; just means &amp;ldquo;a bunch of creeps.&amp;rdquo; It doesn&amp;rsquo;t have a fixed formation, which makes it way more flexible. In this post, when I say blob, I mean this specific approach: defining custom weights, letting behaviors emerge from those weights, and having each squad member coordinate with others to find the moves that maximize the total payoff.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Hello World</title>
       <link>http://localhost:1313/posts/hello-world/</link>

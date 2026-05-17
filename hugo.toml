@@ -2,3 +2,5 @@ baseURL = 'https://iamgqr.github.io/'
 locale = 'en-us'
 title = 'StageChan'
 theme = 'PaperMod'
+[params]
+ShowToc = true
