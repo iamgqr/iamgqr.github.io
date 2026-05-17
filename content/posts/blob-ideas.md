@@ -131,6 +131,7 @@ My blob is still pretty unstable in its current state, so there's still a lot of
 
 ## Bonus video
 
-We don't have a video yet, but watch this replay against Harabi's room (before like 5/20/2026): https://screeps.com/a/#!/history/shardX/W39S1?t=1002126
+{{< youtube vZoKR-IitwU >}}
+Also watch this replay against Harabi's room (before like 5/20/2026): https://screeps.com/a/#!/history/shardX/W39S1?t=1002126
 
 Until next time, my friends!
