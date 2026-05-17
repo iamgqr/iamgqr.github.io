@@ -18,7 +18,7 @@ Duo is the simplest example of a "fixed formation" - usually one attacker (with 
 
 ### Quad
 
-Quad is a strategy popularized by Tigga, and it's pretty much the meta right now. A lot of PvP masters like Harabi use it. A Quad is basically four creeps moving in a 2x2 formation, usually 2 attackers and 2 healers. It solves the number problem, but introduces a new limit: "formation constraints". A fixed 2x2 group is hard to move flexibly through complex terrain, and you often have to write special logic just to get them through narrow gaps.
+Quad is a strategy popularized by Tigga (AFAIK), and it's pretty much the meta right now. A lot of PvP masters like Harabi use it. A Quad is basically four creeps moving in a 2x2 formation, usually 2 attackers and 2 healers. It solves the number problem, but introduces a new limit: "formation constraints". A fixed 2x2 group is hard to move flexibly through complex terrain, and you often have to write special logic just to get them through narrow gaps.
 
 Also, there are some common issues with fixed formations that Quad doesn't really fix:
 
@@ -34,6 +34,7 @@ Compared to quad, blob solves a lot of things:
 - No 4-player "roster limit": Blob supports any number of creeps. It's like a basket, you just throw in as many creeps as you want, and you can even add more dynamically.
 - No 2x2 "formation limit": Blob has no fixed shape, it acts like a fluid, so it's much easier to coordinate in tricky terrain situations.
 - No "dead logic" (if-else): Blob doesn't follow hardcoded if-else logic. Instead, it tries to find the optimal solution that maximizes the return, which avoids the problem of "edge cases" from the very root.
+- Also, introducing some randomness (as in my implementation) makes your movements a lot less predictable.
 
 ### Hungarian in blob
 
