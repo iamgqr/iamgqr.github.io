@@ -126,6 +126,8 @@ There is something very elegant about this design: a creep just needs to choose 
 - Incremental evaluation, instead of re-calcing everything after perturbation
 - WASM
 
+My blob is still pretty unstable in its current state, so there's still a lot of work to do in the future. For now, I think I've had enough blobbing for some while. Ping me on Discord if you have any new idea!
+
 ## Bonus video
 
 We don't have a video yet, but watch this replay against Harabi's room (before like 5/20/2026): https://screeps.com/a/#!/history/shardX/W39S1?t=1002126
